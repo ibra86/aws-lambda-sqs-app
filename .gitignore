@@ -1,0 +1,8 @@
+/.idea
+/.venv
+.env*
+.pytest_cache
+/infrastructure/.terraform*
+*.tfstate
+*.tfvars
+Pipfile*
