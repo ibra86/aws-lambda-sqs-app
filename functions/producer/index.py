@@ -1,10 +1,6 @@
-import json
-from datetime import datetime
-
-from logger import logger
-from sqs_publisher import SqsPublisher
-
-DATE_FORMAT: str = '%Y-%m-%d %H:%M:%S'
+from module.logger import logger
+from module.message_service import MessageService
+from module.sqs_service import SqsPublisher
 
 
 def handler(event, _context):
@@ -17,10 +13,8 @@ def handler(event, _context):
     }
     """
     logger.info(f'Received event: {event}')
-    body = {'timestamp': datetime.utcnow().strftime(DATE_FORMAT)}
-    message = json.dumps(body)
+    message = MessageService().timestamp_message()
     SqsPublisher().publish(message)
-    return message
 
 
 if __name__ == '__main__':

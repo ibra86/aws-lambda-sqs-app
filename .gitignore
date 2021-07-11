@@ -3,6 +3,7 @@
 .env*
 .pytest_cache
 /infrastructure/.terraform*
-*.tfstate
+/infrastructure/builds
+*.tfstate*
 *.tfvars
 Pipfile*
