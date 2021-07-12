@@ -1,9 +1,10 @@
-/.idea
-/.venv
+.idea
+.venv
 .env*
 .pytest_cache
-/infrastructure/.terraform*
-/infrastructure/builds
+infrastructure/.terraform*
+infrastructure/builds
+vendor
 *.tfstate*
 *.tfvars
 Pipfile*

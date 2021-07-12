@@ -8,6 +8,7 @@ exclude =
     .venv,
     .venv*,
     venv,
+    vendor,
     .cache
     .terraform
 max-complexity = 10

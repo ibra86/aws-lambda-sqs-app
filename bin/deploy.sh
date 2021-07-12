@@ -1,4 +1,11 @@
-cd ../infrastructure/ || exit
+cd ..
+if [ ! -d "vendor/python" ]; then
+  mkdir -p vendor/python
+  echo "Installing required layer dependencies"
+  pip install -r requirements_layer.txt -t vendor/python
+fi
+
+cd infrastructure/ || exit
 
 terraform --version
 
