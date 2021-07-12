@@ -59,7 +59,9 @@ resource "aws_iam_role_policy" "worker_lambda_role_policy" {
     "Statement": [
         {
             "Action": [
-                "sqs:*"
+                "sqs:*",
+                "s3:*",
+                "sns:*"
             ],
             "Resource": ["*"],
             "Effect": "Allow",
