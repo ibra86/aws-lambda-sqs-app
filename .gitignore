@@ -7,4 +7,3 @@ infrastructure/builds
 vendor
 *.tfstate*
 *.tfvars
-Pipfile*
