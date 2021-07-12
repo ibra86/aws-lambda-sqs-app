@@ -1,3 +1,4 @@
+from module.constants import SQS_QUEUE_NAME
 from module.logger import logger
 from module.message_service import MessageService
 from module.sqs_service import SqsPublisher
@@ -14,7 +15,7 @@ def handler(event, _context):
     """
     logger.info(f'Received event: {event}')
     message = MessageService().timestamp_message()
-    SqsPublisher().publish(message)
+    SqsPublisher(SQS_QUEUE_NAME).publish(message)
 
 
 if __name__ == '__main__':

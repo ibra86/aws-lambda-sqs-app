@@ -5,7 +5,8 @@ from datetime import datetime
 import boto3
 import yaml
 
-from constants import DATE_FORMAT, SNS_CONFIG_FILE
+from module.constants import DATE_FORMAT, SNS_CONFIG_FILE, SNS_CONFIG_SUBSCRIPTION
+from module.logger import logger
 
 
 class SnsConfig:
@@ -26,14 +27,16 @@ class SnsProcessor:
 
     @property
     def config(self):
-        return SnsConfig('email').read()
+        return SnsConfig(SNS_CONFIG_SUBSCRIPTION).read()
 
     def notify(self, sqs_response):
-        for m in sqs_response.get('Messages'):
-            timestamp = json.loads(m.get('Body')).get('timestamp')
-            dt = datetime.strptime(timestamp, DATE_FORMAT)
-            if dt.minute == 0:
-                self.send_message(dt.hour)
+        if sqs_response.get('Messages') is not None:
+            for m in sqs_response.get('Messages'):
+                logger.debug(f'Processing message {m} to for SNS')
+                timestamp = json.loads(m.get('Body')).get('timestamp')
+                dt = datetime.strptime(timestamp, DATE_FORMAT)
+                if dt.minute == 0:
+                    self.send_message(dt.hour)
 
     def send_message(self, text):
         topics = self.sns_client.list_topics().get('Topics')
@@ -45,3 +48,4 @@ class SnsProcessor:
             Message=message,
             Subject=self.config['subject']
         )
+        logger.info(f'SNS notification sent by {SNS_CONFIG_SUBSCRIPTION}')

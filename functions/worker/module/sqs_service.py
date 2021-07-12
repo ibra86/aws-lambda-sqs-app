@@ -1,6 +1,7 @@
 import boto3
 
 from module.constants import SQS_WAIT_TIME_SECONDS, SQS_VISIBILITY_TIMEOUT, SQS_MAX_NUMBER_OF_MESSAGES
+from module.logger import logger
 
 
 class SqsProcessor:
@@ -20,4 +21,5 @@ class SqsProcessor:
             VisibilityTimeout=SQS_VISIBILITY_TIMEOUT,
             WaitTimeSeconds=SQS_WAIT_TIME_SECONDS,
         )
+        logger.info(f'Polling SQS messages: {response}')
         return response
