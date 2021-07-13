@@ -13,7 +13,7 @@ Requirements
 
 App requires the following to run:
 
-  * [Python][Python] (normally comes with Node.js)
+  * [Python][Python]
   * [Terraform][Terraform] 0.13+
 
 
